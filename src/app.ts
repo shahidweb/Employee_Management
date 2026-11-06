@@ -1,11 +1,8 @@
 import express from "express";
+import apiRoutes from "./routes/index";
 
 export const app = express();
 
 app.use(express.json());
 
-
-app.get("/", (_, res) => {
-    return res.status(200).json({ message: "Welcome to the Employee Management API!" })
-});
-
+app.use("/api/v1", apiRoutes);
