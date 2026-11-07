@@ -1,9 +1,9 @@
 import bcrypt from "bcryptjs";
-import { Employee } from "../employee/employee.model";
-import type { CreateEmployeeInput, LoginInput } from "./auth.validation";
 import jwt from "jsonwebtoken";
 import { getEnvKey } from "../../lib/env";
 import { APIError } from "../../utils/APIError";
+import { Employee } from "../employee/employee.model";
+import type { LoginInput } from "./auth.validation";
 
 
 

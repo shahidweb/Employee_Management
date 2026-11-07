@@ -1,5 +1,4 @@
 import mongoose, { Document, Schema } from "mongoose";
-import type { IUser } from "../auth/user.model";
 
 export type EmployeeRole = "Admin" | "HR" | "Employee";
 export type Gender = "Male" | "Female" | "Other";

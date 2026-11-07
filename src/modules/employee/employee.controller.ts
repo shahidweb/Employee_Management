@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
-import { createEmployeeSchema } from "../auth/auth.validation";
 import { createEmployeeService } from "./employee.service";
+import { createEmployeeSchema } from "./employee.validation";
 
 
 export const createEmployee = async (req: Request, res: Response, next: NextFunction) => {

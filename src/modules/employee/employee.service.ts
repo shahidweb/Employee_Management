@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import { APIError } from "../../utils/APIError";
-import type { CreateEmployeeInput } from "../auth/auth.validation";
 import { Counter } from "./counter.model";
 import { Employee } from "./employee.model";
+import type { CreateEmployeeInput } from "./employee.validation";
 
 
 export const createEmployeeService = async (data: CreateEmployeeInput) => {
