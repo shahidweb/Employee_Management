@@ -10,6 +10,7 @@ export interface IProjectModel extends Document {
     contactPerson: string,
     contactNo: string,
     emailId: string,
+    isActive:boolean
 }
 
 export const projectSchema = new Schema<IProjectModel>({
@@ -20,7 +21,8 @@ export const projectSchema = new Schema<IProjectModel>({
     contactPerson: { type: String, required: true, trim: true },
     contactNo: { type: String, required: true },
     startDate: { type: Date, required: true },
-    emailId: { type: String, required: true, lowercase: true, trim: true }
+    emailId: { type: String, required: true, lowercase: true, trim: true },
+    isActive: { type: Boolean, default: true}
 }, { timestamps: true })
 
 export const Project = mongoose.model<IProjectModel>('Project', projectSchema)
