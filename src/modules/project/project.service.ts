@@ -74,6 +74,10 @@ export const getAllProjectService = async () => {
 }
 
 export const getProjectByIdService = async (projectId: number) => {
+    // match  mean find data, where prodect id is same
+    // lookup mean data  employee with project like join in sql 
+    // unwind mean data convert array to object 
+    // project mean select field for return response (1 mean include the field and 0 mean exlcude the field from response)
     const projects = await Project.aggregate([
         {
             $match: {
