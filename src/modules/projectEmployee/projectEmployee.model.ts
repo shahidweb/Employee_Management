@@ -1,6 +1,5 @@
 import mongoose from "mongoose"
 
-
 export interface IProjectModel extends Document {
     empProjectId: number,
     projectId: number,
@@ -17,7 +16,7 @@ const projectEmployeeSchema = new mongoose.Schema({
     assignedDate: { type: Date, required: true },
     role: { type: String, required: true, trim: true },
     isActive: { type: Boolean, default: true },
-})
+}, { timestamps: true })
 
 // Prevent duplicate active assignments for the same employee and project.
 projectEmployeeSchema.index(
