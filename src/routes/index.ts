@@ -5,6 +5,7 @@ import departmentRoutes from "../modules/department/department.routes";
 import employeeRoutes from "../modules/employee/employee.routes";
 import projectRoutes from "../modules/project/project.routes";
 import projectEmployeeRoutes from "../modules/projectEmployee/projectEmployee.routes";
+import leaveTypeRoutes from "../modules/leaveType/leaveType.routes"
 
 
 const router = Router();
@@ -21,6 +22,7 @@ router.use('/employee', employeeRoutes)
 router.use('/project', projectRoutes)
 router.use('/projectEmployee', projectEmployeeRoutes)
 router.use('/departments', departmentRoutes)
-router.use('/child-departments', childDepartmentRoutes)
+router.use('/childDepartments', childDepartmentRoutes)
+router.use("/leaveType", leaveTypeRoutes)
 
 export default router;
