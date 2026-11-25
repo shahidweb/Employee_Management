@@ -8,6 +8,7 @@ import projectEmployeeRoutes from "../modules/projectEmployee/projectEmployee.ro
 import leaveTypeRoutes from "../modules/leaveType/leaveType.routes"
 import earnedLeaveRoutes from "../modules/earnedLeave/earnedLeave.routes"
 import leaveRequestRoutes from "../modules/leaveRequest/leaveRequest.routes"
+import dashboardRoutes from "../modules/dashboards/dashboard.routes"
 
 
 const router = Router();
@@ -28,5 +29,6 @@ router.use('/childDepartments', childDepartmentRoutes)
 router.use("/leaveType", leaveTypeRoutes)
 router.use("/earnedLeave", earnedLeaveRoutes)
 router.use("/leaveRequest", leaveRequestRoutes)
+router.use("/dashboards", dashboardRoutes)
 
 export default router;
