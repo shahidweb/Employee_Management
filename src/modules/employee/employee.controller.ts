@@ -1,12 +1,12 @@
 import { type NextFunction, type Request, type Response } from "express";
 import { APIError } from "../../utils/APIError";
 import { createEmployeeService, deleteEmployeeService, getAllEmployeesService, getEmployeeByIdService, updateEmployeeService } from "./employee.service";
-import { createEmployeeSchema, updateEmployeeSchema } from "./employee.validation";
+import { createEmployeeValidation, updateEmployeeValidation } from "./employee.validation";
 
 
 export const createEmployee = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const validation = createEmployeeSchema.safeDecode(req.body);
+        const validation = createEmployeeValidation.safeDecode(req.body);
         if (!validation.success) {
             return res.status(400).json({
                 success: false,
@@ -70,7 +70,7 @@ export const updateEmployee = async (req: Request, res: Response, next: NextFunc
             throw new APIError(400, "Invalid employee ID")
         }
 
-        const validation = updateEmployeeSchema.safeParse(req.body);
+        const validation = updateEmployeeValidation.safeParse(req.body);
         if (!validation.success) {
             return res.status(400).json({
                 success: false,

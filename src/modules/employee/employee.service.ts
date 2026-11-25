@@ -25,13 +25,11 @@ export const createEmployeeService = async (data: CreateEmployeesInput) => {
         emailId: data.emailId.toLowerCase(),
         password: hashedPassword,
         employeeId: counter!.sequence,
+        isActive: true
     });
 
-    const employeeRes = employee.toObject();
-    if (employeeRes.password) {
-        delete employeeRes.password
-    }
-    return employee;
+    const { _id, password, __v, ...employeeRes } = employee.toObject();
+    return employeeRes;
 }
 
 export const getAllEmployeesService = async (query: any) => {
@@ -60,7 +58,7 @@ export const getAllEmployeesService = async (query: any) => {
 
     const [employees, totalRecords] = await Promise.all([
         Employee.find(filter)
-            .select("-password")
+            .select("-password -_id -__v -updatedAt")
             .sort({ createdDate: -1 })
             .skip(skip)
             .limit(limit)
@@ -82,7 +80,7 @@ export const getAllEmployeesService = async (query: any) => {
 export const getEmployeeByIdService = async (employeeId: number) => {
     const employee =
         await Employee.findOne({ employeeId, isActive: true })
-            .select("-password").lean();
+            .select("-password -_id -__v -updatedAt").lean();
 
     if (!employee) {
         throw new APIError(404, "Employee not found")
@@ -117,9 +115,8 @@ export const updateEmployeeService = async (employeeId: number, data: UpdateEmpl
     Object.assign(employee, data);
     await employee.save();
 
-    const response = employee.toObject()
-    delete response.password;
-    return response;
+    const { _id, password, __v, ...employeeRes } = employee.toObject();
+    return employeeRes;
 }
 
 export const deleteEmployeeService = async (employeeId: number) => {
