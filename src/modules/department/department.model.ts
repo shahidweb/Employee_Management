@@ -15,4 +15,4 @@ const departmentSchema = new Schema<IDepartment>({
     isActive: { type: Boolean, default: true },
 })
 
-export const Department = mongoose.model<IDepartment>('Department', departmentSchema);
+export const Department = mongoose.model<IDepartment>('ParentDepartment', departmentSchema);

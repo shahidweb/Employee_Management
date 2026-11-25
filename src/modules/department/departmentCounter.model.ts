@@ -9,4 +9,4 @@ const departmentCounterCounterScehma = new Schema(
     { versionKey: false }
 )
 
-export const DepartmentCounter = mongoose.model("DepartmentCounter", departmentCounterCounterScehma)
+export const DepartmentCounter = mongoose.model("ParentDepartmentCounter", departmentCounterCounterScehma)

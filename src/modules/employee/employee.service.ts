@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import { APIError } from "../../utils/APIError";
-import { Counter } from "./counter.model";
+import { EmployeeCounter } from "./employee.counter.model";
 import { Employee } from "./employee.model";
 import type { CreateEmployeesInput, UpdateEmployeeInput } from "./employee.validation";
 
@@ -15,7 +15,7 @@ export const createEmployeeService = async (data: CreateEmployeesInput) => {
         throw new APIError(409, "Email already registered")
     }
 
-    const counter = await Counter.findByIdAndUpdate('employeeId',
+    const counter = await EmployeeCounter.findByIdAndUpdate('employeeId',
         { $inc: { sequence: 1 } }, { new: true, upsert: true });
 
     const hashedPassword = await bcrypt.hash(data.password, 12);

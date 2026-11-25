@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const counterSchema = new Schema({
+const employeeCounterSchema = new Schema({
     _id: {
         type: String,
         required: true
@@ -11,4 +11,4 @@ const counterSchema = new Schema({
     }
 });
 
-export const Counter = mongoose.model("Counter", counterSchema)
+export const EmployeeCounter = mongoose.model("EmployeeCounter", employeeCounterSchema)
