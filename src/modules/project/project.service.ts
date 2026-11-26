@@ -28,7 +28,8 @@ export const createProjectService = async (data: CreateProjectInput) => {
         projectId: counter.sequence,
         emailId: data.emailId.toLowerCase()
     })
-    return project;
+    const { projectId, projectName, clientName, leadByEmpId, contactPerson, contactNo, startDate, emailId } = project
+    return { projectId, projectName, clientName, leadByEmpId, contactPerson, contactNo, startDate, emailId };
 }
 
 export const getAllProjectService = async () => {
@@ -36,14 +37,14 @@ export const getAllProjectService = async () => {
         {
             $lookup: {
                 from: "employees",
-                localField: "LeadByEmpId",
+                localField: "leadByEmpId",
                 foreignField: "employeeId",
-                as: "leadEmployee"
+                as: "employees"
             }
         },
         {
             $unwind: {
-                path: "$leadEmployee",
+                path: "$employees",
                 preserveNullAndEmptyArrays: true
             }
         },
@@ -58,10 +59,7 @@ export const getAllProjectService = async () => {
                 contactPerson: 1,
                 contactNo: 1,
                 emailId: 1,
-                isActive: true,
-                employeeName: {
-                    $ifNull: ["$leadEmployee.employeeName", ""]
-                }
+                employeeName: "$employees.employeeName"
             }
         },
         {
@@ -89,12 +87,12 @@ export const getProjectByIdService = async (projectId: number) => {
                 from: "employees",
                 localField: "leadByEmpId",
                 foreignField: "employeeId",
-                as: "leadEmployee"
+                as: "employee"
             }
         },
         {
             $unwind: {
-                path: "$leadEmployee",
+                path: "$employee",
                 preserveNullAndEmptyArrays: true
             }
         },
@@ -109,12 +107,7 @@ export const getProjectByIdService = async (projectId: number) => {
                 contactPerson: 1,
                 contactNo: 1,
                 emailId: 1,
-                employeeName: {
-                    $ifNull: [
-                        "$leadEmployee.employeeName",
-                        ""
-                    ]
-                }
+                employeeName: "$employee.employeeName",
             }
         }
     ]);
@@ -144,7 +137,8 @@ export const updateProjectService = async (projectId: number, data: UpdateProjec
 
     Object.assign(project, updateData);
     await project.save();
-    return project;
+    const { projectName, clientName, leadByEmpId, contactPerson, contactNo, startDate, emailId } = project;
+    return { projectId, projectName, clientName, leadByEmpId, contactPerson, contactNo, startDate, emailId }
 }
 
 export const deleteProjectService = async (projectId: number) => {

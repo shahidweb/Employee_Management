@@ -12,4 +12,6 @@ router.get("/", authorize(PermissionRole.ADMIN, PermissionRole.HR), getAllChildD
 router.get("/:id", authorize(PermissionRole.ADMIN, PermissionRole.HR), getChildDepartmentByParentId);
 router.delete("/:id", authorize(PermissionRole.ADMIN, PermissionRole.HR), deleteChildDepartmentById);
 
+//pending update route
+
 export default router;

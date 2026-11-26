@@ -175,7 +175,7 @@ export const getLeaveRequestByEmpIdService = async (employeeId: number) => {
         }
     ])
 
-    return getLeaveRequest[0];
+    return getLeaveRequest[0] ? getLeaveRequest[0] : {};
 }
 
 export const changeLeaveRequestStatusService = async (leaveId: number, data: ChangeLeaveStatusInput) => {
@@ -183,11 +183,11 @@ export const changeLeaveRequestStatusService = async (leaveId: number, data: Cha
     if (!leaveRequest) {
         throw new APIError(404, "Leave Request ID not found")
     }
-    
-    leaveRequest.status = data.status;
-    leaveRequest.save();
 
-    return leaveRequest;
+    leaveRequest.status = data.status;
+    await leaveRequest.save();
+    const { employeeId, leaveTypeId, startDate, endDate, status, reason, requestDate } = leaveRequest;
+    return { leaveId, employeeId, leaveTypeId, startDate, endDate, status, reason, requestDate };
 }
 
 export const deleteLeaveRequestService = async (leaveId: number) => {

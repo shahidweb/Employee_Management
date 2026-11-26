@@ -40,8 +40,8 @@ export const createProjectEmployeeService = async (data: createProjectEmployeeIn
         ...data,
         isActive: true
     });
-
-    return projectEmployee;
+    const { empProjectId, projectId, empId, assignedDate, role, isActive } = projectEmployee;
+    return { empProjectId, projectId, empId, assignedDate, role, isActive };
 }
 
 export const getAllProjectEmployeeService = async () => {
@@ -199,7 +199,8 @@ export const updateProjectEmployeeByIdService = async (empProjectId: number, dat
 
     Object.assign(projectEmployee, data);
     await projectEmployee.save();
-    return projectEmployee;
+    const { empId, assignedDate, role } = projectEmployee;
+    return { empProjectId, projectId, empId, assignedDate, role, isActive };
 }
 
 export const deleteProjectEmployeeByIdService = async (empProjectId: number) => {
@@ -209,5 +210,7 @@ export const deleteProjectEmployeeByIdService = async (empProjectId: number) => 
     }
     existingAssignment.isActive = false;
     await existingAssignment.save();
-    return existingAssignment;
+
+    const { projectId, empId, assignedDate, role, isActive } = existingAssignment;
+    return { empProjectId, projectId, empId, assignedDate, role, isActive };
 }
