@@ -78,7 +78,7 @@ export const getDashboardService = async () => {
         Project.countDocuments({ isActive: true }),
 
         Employee.find({ isActive: true })
-            .select("employeeId employeeName contactNo emailId deptId gender role createdDate -_id")
+            .select("employeeId employeeName contactNo emailId deptId gender role createdAt -_id")
             .sort({ employeeId: -1 })
             .limit(5)
             .lean(),
