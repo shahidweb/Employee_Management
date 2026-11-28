@@ -30,7 +30,7 @@ export const getLeaveType = async (req: Request, res: Response, next: NextFuncti
     try {
 
         const leaveType = await getLeaveTypesService()
-        return res.status(201).send({
+        return res.status(200).send({
             success: true,
             message: "Leave type fetched successfully!",
             data: leaveType

@@ -8,7 +8,7 @@ const  router = Router();
 router.use(authenticate)
 
 router.get("/Admin", authorize(PermissionRole.ADMIN), getDashboard);
-router.get("/HR", authorize(PermissionRole.HR), getHRDashboard);
+router.get("/HR", authorize(PermissionRole.ADMIN, PermissionRole.HR), getHRDashboard);
 router.get("/emp/:id", authorize(PermissionRole.EMPLOYEE), getEmployeeLeaveDashboard);
 
 

@@ -62,7 +62,7 @@ export const createEarnedLeaveService = async (data: CreateEarnedLeaveInput) => 
 }
 
 export const getAllEarnedLeaveService = async () => {
-    const allearnedLeaveService = await EarnedLeave.find()
+    const allearnedLeaveService = await EarnedLeave.find({isActive:false})
         .select("earnedLeaveId employeeId totalEarnedLeaves totalSickEarnedLeaves lastUpdatedDate -_id")
         .sort({ earnedLeaveId: 1 }).lean();
 
